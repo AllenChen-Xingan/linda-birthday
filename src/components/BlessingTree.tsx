@@ -29,30 +29,39 @@ export default function BlessingTree({ onComplete }: Props) {
 
   return (
     <motion.div
-      className="min-h-[80vh] relative overflow-hidden"
+      className="min-h-dvh relative overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Tree trunk and branches */}
+      {/* Tree trunk and branches — full width, anchored to bottom */}
       <svg
         className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none"
-        width="600"
-        height="600"
-        viewBox="0 0 600 600"
-        style={{ maxWidth: '90vw' }}
+        width="100%"
+        height="100%"
+        viewBox="0 0 800 900"
+        preserveAspectRatio="xMidYMax meet"
       >
-        <path d="M 280 600 Q 285 500 290 400 Q 292 350 295 300" stroke="#8B7355" strokeWidth="16" fill="none" strokeLinecap="round" />
-        <path d="M 295 300 Q 250 250 200 220" stroke="#8B7355" strokeWidth="10" fill="none" strokeLinecap="round" />
-        <path d="M 295 300 Q 340 250 390 220" stroke="#8B7355" strokeWidth="10" fill="none" strokeLinecap="round" />
-        <path d="M 292 350 Q 230 320 180 300" stroke="#8B7355" strokeWidth="8" fill="none" strokeLinecap="round" />
-        <path d="M 292 350 Q 360 320 410 300" stroke="#8B7355" strokeWidth="8" fill="none" strokeLinecap="round" />
-        <path d="M 290 400 Q 240 380 200 370" stroke="#8B7355" strokeWidth="7" fill="none" strokeLinecap="round" />
-        <path d="M 290 400 Q 340 380 380 370" stroke="#8B7355" strokeWidth="7" fill="none" strokeLinecap="round" />
+        {/* Main trunk */}
+        <path d="M 380 900 Q 385 750 390 600 Q 393 520 396 440" stroke="#8B7355" strokeWidth="18" fill="none" strokeLinecap="round" />
+        {/* Top branches */}
+        <path d="M 396 440 Q 310 370 200 310" stroke="#8B7355" strokeWidth="11" fill="none" strokeLinecap="round" />
+        <path d="M 396 440 Q 490 370 600 310" stroke="#8B7355" strokeWidth="11" fill="none" strokeLinecap="round" />
+        {/* Mid branches */}
+        <path d="M 393 520 Q 290 470 160 430" stroke="#8B7355" strokeWidth="9" fill="none" strokeLinecap="round" />
+        <path d="M 393 520 Q 500 470 640 430" stroke="#8B7355" strokeWidth="9" fill="none" strokeLinecap="round" />
+        {/* Lower branches */}
+        <path d="M 390 600 Q 300 560 180 540" stroke="#8B7355" strokeWidth="8" fill="none" strokeLinecap="round" />
+        <path d="M 390 600 Q 480 560 620 540" stroke="#8B7355" strokeWidth="8" fill="none" strokeLinecap="round" />
+        {/* Small twigs */}
+        <path d="M 200 310 Q 150 280 100 270" stroke="#8B7355" strokeWidth="5" fill="none" strokeLinecap="round" />
+        <path d="M 600 310 Q 650 280 700 270" stroke="#8B7355" strokeWidth="5" fill="none" strokeLinecap="round" />
+        <path d="M 160 430 Q 120 410 80 400" stroke="#8B7355" strokeWidth="4" fill="none" strokeLinecap="round" />
+        <path d="M 640 430 Q 680 410 720 400" stroke="#8B7355" strokeWidth="4" fill="none" strokeLinecap="round" />
       </svg>
 
-      <div className="relative z-10 pt-12 pb-24 px-4">
-        <div className="text-center mb-12">
+      <div className="relative z-10 pt-10 pb-24 px-4">
+        <div className="text-center mb-8">
           <motion.h2
             className="font-serif text-3xl text-text mb-3"
             initial={{ opacity: 0, y: 20 }}
@@ -77,7 +86,7 @@ export default function BlessingTree({ onComplete }: Props) {
             </p>
           </div>
         ) : (
-          <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-5 md:gap-6 max-w-5xl">
             {blessings.map((blessing, index) => (
               <BlessingLeaf
                 key={blessing.id}
