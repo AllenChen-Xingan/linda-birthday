@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin
+Disallow: /send
+Allow: /
+
+Sitemap: https://yourdomain.com/linda-birthday/sitemap.xml

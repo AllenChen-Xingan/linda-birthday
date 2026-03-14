@@ -1,0 +1,16 @@
+{
+  "name": "Happy 20th Birthday, Linda",
+  "short_name": "Linda's Birthday",
+  "start_url": "/linda-birthday/",
+  "display": "standalone",
+  "background_color": "#FFF8F0",
+  "theme_color": "#FFF8F0",
+  "description": "A birthday journey through memories",
+  "icons": [
+    {
+      "src": "/linda-birthday/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
