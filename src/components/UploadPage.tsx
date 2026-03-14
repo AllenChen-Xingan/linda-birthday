@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { useBlessings } from '../hooks/useBlessings'
 
@@ -72,6 +72,11 @@ export default function UploadPage() {
   const chunksRef = useRef<Blob[]>([])
   const streamRef = useRef<MediaStream | null>(null)
   const videoPreviewRef = useRef<HTMLVideoElement | null>(null)
+
+  const filePreviewUrl = useMemo(() => {
+    if (!file || recordedBlob) return null
+    return URL.createObjectURL(file)
+  }, [file, recordedBlob])
 
   const startRecording = async (mode: RecordMode) => {
     if (!mode) return
@@ -330,17 +335,37 @@ export default function UploadPage() {
             )}
 
             {!recording && !recordedBlob && file && (
-              <div className="flex items-center justify-between bg-cream/50 rounded-lg px-4 py-2.5">
-                <p className="text-xs text-text-muted truncate">
-                  {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setFile(null)}
-                  className="text-text-muted hover:text-text-light text-sm ml-2 cursor-pointer"
-                >
-                  ✕
-                </button>
+              <div className="space-y-3">
+                {file.type.startsWith('video/') && filePreviewUrl && (
+                  <video
+                    controls
+                    playsInline
+                    src={filePreviewUrl}
+                    className="w-full rounded-xl"
+                  />
+                )}
+                {file.type.startsWith('audio/') && filePreviewUrl && (
+                  <audio controls src={filePreviewUrl} className="w-full" />
+                )}
+                {file.type.startsWith('image/') && filePreviewUrl && (
+                  <img
+                    src={filePreviewUrl}
+                    alt="Preview"
+                    className="w-full rounded-xl"
+                  />
+                )}
+                <div className="flex items-center justify-between bg-cream/50 rounded-lg px-4 py-2.5">
+                  <p className="text-xs text-text-muted truncate">
+                    {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setFile(null)}
+                    className="text-text-muted hover:text-text-light text-sm ml-2 cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
             )}
           </div>
