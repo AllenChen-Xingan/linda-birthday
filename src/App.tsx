@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import Landing from './components/Landing'
 import Timeline from './components/Timeline'
@@ -10,8 +10,14 @@ import AdminPage from './components/AdminPage'
 type View = 'landing' | 'timeline' | 'blessings' | 'future'
 
 function App() {
-  const hash = window.location.hash
+  const [hash, setHash] = useState(window.location.hash)
   const [view, setView] = useState<View>('landing')
+
+  useEffect(() => {
+    const handleHashChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
 
   // Friends: /linda-birthday/#/send
   if (hash === '#/send') return <UploadPage />
